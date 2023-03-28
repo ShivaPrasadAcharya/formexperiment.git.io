@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Google Form Example</title>
+</head>
+<body>
+	<h1>Google Form Example</h1>
+	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required><br><br>
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" required><br><br>
+		<label for="message">Message:</label><br>
+		<textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+		<input type="submit" value="Submit">
+	</form>
+
+	<?php
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		$name = $_POST["name"];
+		$email = $_POST["email"];
+		$message = $_POST["message"];
+
+		// Sending the email to spacharya43@gmail.com
+		$to = "spacharya43@gmail.com";
+		$subject = "Google Form Submission";
+		$body = "Name: " . $name . "\nEmail: " . $email . "\nMessage: " . $message;
+		mail($to, $subject, $body);
+		echo "<p>Your form has been submitted. Thank you!</p>";
+	}
+	?>
+</body>
+</html>
